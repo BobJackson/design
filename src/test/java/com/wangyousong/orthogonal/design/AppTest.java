@@ -37,8 +37,13 @@ class AppTest {
     }
 
     @Test
-    void should_find_student() {
+    void should_find_student_age_is_18() {
         assertThat(find(students, age(eq(18))), notNullValue());
+        assertThat(find(students, name("horance")), notNullValue());
+    }
+
+    @Test
+    void should_find_student_name_is_horance() {
         assertThat(find(students, name("horance")), notNullValue());
     }
 
