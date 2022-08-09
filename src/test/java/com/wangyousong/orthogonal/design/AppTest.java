@@ -8,30 +8,31 @@ import java.util.stream.IntStream;
 import static com.wangyousong.orthogonal.design.App.find;
 import static com.wangyousong.orthogonal.design.Gender.FEMALE;
 import static com.wangyousong.orthogonal.design.Gender.MALE;
+import static com.wangyousong.orthogonal.design.HumanPredicate.age;
+import static com.wangyousong.orthogonal.design.HumanPredicate.name;
 import static com.wangyousong.orthogonal.design.Matcher.eq;
 import static com.wangyousong.orthogonal.design.Matcher.ne;
-import static com.wangyousong.orthogonal.design.StudentPredicate.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
 class AppTest {
 
-    private final Iterable<Student> students = IntStream.range(0, 5)
+    private final Iterable<Human> students = IntStream.range(0, 5)
             .mapToObj(AppTest::createStudent)
             .collect(Collectors.toList());
 
-    private static Student createStudent(int i) {
-        return new Student("horance" + (i == 0 ? "" : String.valueOf(i)),
+    private static Human createStudent(int i) {
+        return Human.student("horance" + (i == 0 ? "" : String.valueOf(i)),
                 18 + i,
                 i % 2 == 0 ? MALE : FEMALE);
     }
 
-    private final Iterable<Teacher> teachers = IntStream.range(0, 5)
+    private final Iterable<Human> teachers = IntStream.range(0, 5)
             .mapToObj(AppTest::createTeacher)
             .collect(Collectors.toList());
 
-    private static Teacher createTeacher(int i) {
-        return new Teacher("horance" + (i == 0 ? "" : String.valueOf(i)),
+    private static Human createTeacher(int i) {
+        return Human.teacher("horance" + (i == 0 ? "" : String.valueOf(i)),
                 18 + i,
                 i % 2 == 0 ? MALE : FEMALE);
     }
@@ -43,12 +44,12 @@ class AppTest {
 
     @Test
     void should_find_student_name_is_horance() {
-        assertThat(find(students, name("horance")), notNullValue());
+        assertThat(find(students, name(eq("horance"))), notNullValue());
     }
 
     @Test
     void should_find_teacher() {
-        assertThat(find(teachers, Teacher::female), notNullValue());
+        assertThat(App.find(teachers, Human::female), notNullValue());
     }
 
     @Test
@@ -58,7 +59,7 @@ class AppTest {
 
     @Test
     void should_find_age_not_18_female_student() {
-        assertThat(find(students, age(ne(18)).and(Student::female)), notNullValue());
+        assertThat(find(students, age(ne(18)).and(Human::female)), notNullValue());
     }
 
 }
