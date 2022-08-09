@@ -56,4 +56,9 @@ class AppTest {
         assertThat(find(students, age(ne(18))), notNullValue());
     }
 
+    @Test
+    void should_find_age_not_18_female_student() {
+        assertThat(find(students, age(ne(18)).and(Student::female)), notNullValue());
+    }
+
 }
