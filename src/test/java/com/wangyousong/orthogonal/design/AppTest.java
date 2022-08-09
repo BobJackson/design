@@ -1,7 +1,9 @@
 package com.wangyousong.orthogonal.design;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.wangyousong.orthogonal.design.App.find;
 import static com.wangyousong.orthogonal.design.Gender.FEMALE;
@@ -11,15 +13,14 @@ import static org.hamcrest.Matchers.notNullValue;
 
 class AppTest {
 
-    private final Student[] students = new Student[5];
+    private final Iterable<Student> students = IntStream.range(0,5)
+            .mapToObj(AppTest::createStudent)
+            .collect(Collectors.toList());
 
-    @BeforeEach
-    void setUp() {
-        for (int i = 0; i < 5; i++) {
-            students[i] = new Student("horance" + (i == 0 ? "" : String.valueOf(i)),
-                    18 + i,
-                    i % 2 == 0 ? MALE : FEMALE);
-        }
+    private static Student createStudent(int i) {
+        return new Student("horance" + (i == 0 ? "" : String.valueOf(i)),
+                18 + i,
+                i % 2 == 0 ? MALE : FEMALE);
     }
 
     @Test
