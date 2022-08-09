@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 import static com.wangyousong.orthogonal.design.App.find;
 import static com.wangyousong.orthogonal.design.Gender.FEMALE;
 import static com.wangyousong.orthogonal.design.Gender.MALE;
+import static com.wangyousong.orthogonal.design.StudentPredicate.age;
+import static com.wangyousong.orthogonal.design.StudentPredicate.name;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -35,8 +37,8 @@ class AppTest {
 
     @Test
     void should_find_student() {
-        assertThat(find(students, s -> s.age() == 18), notNullValue());
-        assertThat(find(students, s -> s.name().equals("horance")), notNullValue());
+        assertThat(find(students, age(18)), notNullValue());
+        assertThat(find(students, name("horance")), notNullValue());
     }
 
     @Test
