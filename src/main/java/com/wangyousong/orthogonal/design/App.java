@@ -13,4 +13,15 @@ public class App {
         return null;
     }
 
+    // 需求2： 查找一个名字为horance的学生
+
+    public static Student findByName(Student[] students) {
+        for (Student student : students) {
+            if (student.name().equals("horance")) {
+                return student;
+            }
+        }
+        return null;
+    }
+
 }
