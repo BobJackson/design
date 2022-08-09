@@ -41,6 +41,6 @@ class AppTest {
 
     @Test
     void should_find_teacher() {
-        assertThat(find(teachers, t-> t.female()), notNullValue());
+        assertThat(find(teachers, Teacher::female), notNullValue());
     }
 }
