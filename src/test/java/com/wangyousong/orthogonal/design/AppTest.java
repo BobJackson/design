@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 class AppTest {
 
-    private final Iterable<Student> students = IntStream.range(0,5)
+    private final Iterable<Student> students = IntStream.range(0, 5)
             .mapToObj(AppTest::createStudent)
             .collect(Collectors.toList());
 
@@ -23,7 +23,7 @@ class AppTest {
                 i % 2 == 0 ? MALE : FEMALE);
     }
 
-    private final Iterable<Teacher> teachers = IntStream.range(0,5)
+    private final Iterable<Teacher> teachers = IntStream.range(0, 5)
             .mapToObj(AppTest::createTeacher)
             .collect(Collectors.toList());
 
@@ -35,8 +35,8 @@ class AppTest {
 
     @Test
     void should_find_student() {
-        assertThat(find(students, new AgePredicate(18)), notNullValue());
-        assertThat(find(students, new NamePredicate("horance")), notNullValue());
+        assertThat(find(students, s -> s.age() == 18), notNullValue());
+        assertThat(find(students, s -> s.name().equals("horance")), notNullValue());
     }
 
     @Test
