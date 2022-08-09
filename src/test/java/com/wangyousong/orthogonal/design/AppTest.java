@@ -8,8 +8,7 @@ import java.util.stream.IntStream;
 import static com.wangyousong.orthogonal.design.App.find;
 import static com.wangyousong.orthogonal.design.Gender.FEMALE;
 import static com.wangyousong.orthogonal.design.Gender.MALE;
-import static com.wangyousong.orthogonal.design.StudentPredicate.age;
-import static com.wangyousong.orthogonal.design.StudentPredicate.name;
+import static com.wangyousong.orthogonal.design.StudentPredicate.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -37,7 +36,7 @@ class AppTest {
 
     @Test
     void should_find_student() {
-        assertThat(find(students, age(18)), notNullValue());
+        assertThat(find(students, ageEq(18)), notNullValue());
         assertThat(find(students, name("horance")), notNullValue());
     }
 
@@ -45,4 +44,10 @@ class AppTest {
     void should_find_teacher() {
         assertThat(find(teachers, Teacher::female), notNullValue());
     }
+
+    @Test
+    void should_find_female_student() {
+        assertThat(find(students, ageNe(18).and(s-> s.gender().equals(FEMALE))), notNullValue());
+    }
+
 }
