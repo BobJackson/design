@@ -1,6 +1,8 @@
 package com.wangyousong.orthogonal.design;
 
-public class NamePredicate implements StudentPredicate {
+import java.util.function.Predicate;
+
+public class NamePredicate implements StudentPredicate, Predicate<Student> {
     private final String name;
 
     public NamePredicate(String name) {

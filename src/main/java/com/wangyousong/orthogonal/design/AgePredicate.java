@@ -1,6 +1,8 @@
 package com.wangyousong.orthogonal.design;
 
-public class AgePredicate implements StudentPredicate {
+import java.util.function.Predicate;
+
+public class AgePredicate implements StudentPredicate, Predicate<Student> {
     private final int age;
 
     public AgePredicate(int age) {

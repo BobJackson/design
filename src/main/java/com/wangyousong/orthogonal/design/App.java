@@ -1,24 +1,17 @@
 package com.wangyousong.orthogonal.design;
 
+import java.util.function.Predicate;
+
 public class App {
 
     // 需求1： 存在一个学生的列表，查找一个年龄等于18岁的学生
     // 需求2： 查找一个名字为horance的学生
     // 需求3： 存在一个老师列表，查找第一个女老师
 
-    public static Student find(Iterable<Student> students, StudentPredicate predicate) {
-        for (Student student : students) {
-            if (predicate.test(student)) {
-                return student;
-            }
-        }
-        return null;
-    }
-
-    public static Teacher find(Iterable<Teacher> teachers, TeacherPredicate predicate) {
-        for (Teacher t : teachers) {
-            if (predicate.test(t)) {
-                return t;
+    public static <E> E find(Iterable<E> list, Predicate<E> predicate) {
+        for (E e : list) {
+            if (predicate.test(e)) {
+                return e;
             }
         }
         return null;
