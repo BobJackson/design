@@ -7,12 +7,8 @@ public final class StudentPredicate {
     private StudentPredicate() {
     }
 
-    public static Predicate<Student> ageEq(int age) {
-        return s -> s.age() == age;
-    }
-
-    public static Predicate<Student> ageNe(int age) {
-        return s -> s.age() != age;
+    public static Predicate<Student> age(Matcher<Integer> m) {
+        return s -> m.matches(s.age());
     }
 
     public static Predicate<Student> name(String name) {
