@@ -23,9 +23,24 @@ class AppTest {
                 i % 2 == 0 ? MALE : FEMALE);
     }
 
+    private final Iterable<Teacher> teachers = IntStream.range(0,5)
+            .mapToObj(AppTest::createTeacher)
+            .collect(Collectors.toList());
+
+    private static Teacher createTeacher(int i) {
+        return new Teacher("horance" + (i == 0 ? "" : String.valueOf(i)),
+                18 + i,
+                i % 2 == 0 ? MALE : FEMALE);
+    }
+
     @Test
     void should_find_student() {
         assertThat(find(students, new AgePredicate(18)), notNullValue());
         assertThat(find(students, new NamePredicate("horance")), notNullValue());
+    }
+
+    @Test
+    void should_find_teacher() {
+        assertThat(find(teachers, t-> t.female()), notNullValue());
     }
 }
